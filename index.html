@@ -27,6 +27,7 @@
 
       let platforms;
       let player;
+      let cursors;
 
       function create() {
         // enable the Arcade Physics system
@@ -57,11 +58,32 @@
         // add animations to player when he turn left or right
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
+
+        // create cursor for keyboard actions
+        cursors = game.input.keyboard.createCursorKeys();
       }
 
       function update() {
         // add the collider between player and platforms so player can standing ground
         const hitPlatform = game.physics.arcade.collide(player, platforms);
+
+        // stop the player
+        player.body.velocity.x = 0;
+
+        if (cursors.left.isDown) {  // move to the left
+          player.body.velocity.x = -150;
+          player.animations.play('left');
+        } else if (cursors.right.isDown) {  // move to the right
+          player.body.velocity.x = 150;
+          player.animations.play('right');
+        } else {  // stand still
+          player.animations.stop();
+          player.frame = 4;
+        }
+
+        if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
+          player.body.velocity.y = -350;  // Dude will be fall down to the ground
+        }
       }
     </script>
   </body>

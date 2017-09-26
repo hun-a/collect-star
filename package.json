@@ -1,0 +1,16 @@
+{
+  "name": "collect-star",
+  "version": "1.0.0",
+  "description": "Web game made by phaser",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "js",
+    "phaser",
+    "nodejs"
+  ],
+  "author": "huna",
+  "license": "MIT"
+}

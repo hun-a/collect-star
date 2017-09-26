@@ -60,7 +60,8 @@
       }
 
       function update() {
-
+        // add the collider between player and platforms so player can standing ground
+        const hitPlatform = game.physics.arcade.collide(player, platforms);
       }
     </script>
   </body>

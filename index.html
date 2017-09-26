@@ -29,6 +29,8 @@
       let player;
       let cursors;
       let stars;
+      let score = 0;
+      let scoreText;
 
       function create() {
         // enable the Arcade Physics system
@@ -71,6 +73,11 @@
           star.body.gravity.y = 600;
           star.body.bounce.y = 0.7 + Math.random() * 0.2;
         }
+
+        scoreText = game.add.text(16, 16, 'Score: 0', {
+          fontSize: '32px',
+          fill: '#000'
+        });
       }
 
       function update() {
@@ -100,6 +107,9 @@
 
         game.physics.arcade.overlap(player, stars, (player, star) => {
           star.kill();
+
+          score += 10;
+          scoreText.text = 'Score: ' + score;
         }, null, this);
       }
     </script>

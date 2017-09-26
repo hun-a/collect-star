@@ -28,6 +28,7 @@
       let platforms;
       let player;
       let cursors;
+      let stars;
 
       function create() {
         // enable the Arcade Physics system
@@ -61,6 +62,15 @@
 
         // create cursor for keyboard actions
         cursors = game.input.keyboard.createCursorKeys();
+
+        stars = game.add.group();
+        stars.enableBody = true;  // enable physics for any object that is created in this group
+
+        for (let i = 0; i < 12; i++) {
+          const star = stars.create(i * 70, 0, 'star');
+          star.body.gravity.y = 600;
+          star.body.bounce.y = 0.7 + Math.random() * 0.2;
+        }
       }
 
       function update() {
@@ -84,6 +94,13 @@
         if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
           player.body.velocity.y = -350;  // Dude will be fall down to the ground
         }
+
+        // add collider between stars and grounds
+        game.physics.arcade.collide(stars, platforms);
+
+        game.physics.arcade.overlap(player, stars, (player, star) => {
+          star.kill();
+        }, null, this);
       }
     </script>
   </body>

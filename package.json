@@ -12,5 +12,8 @@
     "nodejs"
   ],
   "author": "huna",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.5"
+  }
 }
